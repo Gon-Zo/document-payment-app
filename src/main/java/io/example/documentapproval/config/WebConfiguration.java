@@ -8,24 +8,16 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 public class WebConfiguration implements WebMvcConfigurer {
 
-    @Override
-    public void addViewControllers(ViewControllerRegistry registry) {
+  @Override
+  public void addViewControllers(ViewControllerRegistry registry) {
 
-        registry.addViewController("/home")
-                .setViewName("home");
+    registry.addViewController("/home").setViewName("home");
 
-        registry.addViewController("/login")
-                .setViewName("login");
+    registry.addViewController("/error403_page").setViewName("error403_page");
+  }
 
-        registry.addViewController("/error403_page")
-                .setViewName("error403_page");
-
-    }
-
-    @Override
-    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/asseset/**")
-                .addResourceLocations("classpath:/static/");
-    }
-
+  @Override
+  public void addResourceHandlers(ResourceHandlerRegistry registry) {
+    registry.addResourceHandler("/asseset/**").addResourceLocations("classpath:/static/");
+  }
 }
