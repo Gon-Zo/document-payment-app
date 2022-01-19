@@ -6,7 +6,7 @@ plugins {
 }
 
 group = 'io.example'
-version = '0.0.1-SNAPSHOT'
+version = '1.0.0'
 sourceCompatibility = '11'
 
 configurations {
@@ -31,6 +31,7 @@ dependencies {
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     implementation 'org.apache.commons:commons-lang3:3.9'
     implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
 }
 
 test {

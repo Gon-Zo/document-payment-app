@@ -24,8 +24,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());
 
         http.authorizeRequests()
-                .antMatchers("/**")
+                .antMatchers("/api/**" , "/document**", "/detail-document**" , "/payment-document**", "/payment**")
                 .hasAuthority("ROLE_USER")
+                .antMatchers("/**")
+                .permitAll()
                 .anyRequest()
                 .authenticated();
 
@@ -34,7 +36,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
         http.formLogin()
                 .loginPage("/login")
-                .defaultSuccessUrl("/index", true)
+                .defaultSuccessUrl("/home", true)
                 .failureHandler(authenticationFailureHandler)
                 .permitAll();
 

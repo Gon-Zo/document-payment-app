@@ -25,7 +25,7 @@ public class LoginFailureHandler implements AuthenticationFailureHandler {
 
         PrintWriter out = response.getWriter();
 
-        out.println(String.format("<script>alert('%s'); location.href='/';</script>", message));
+        out.println(String.format("<script>alert('%s'); location.href='/login';</script>", message));
 
         out.flush();
 
