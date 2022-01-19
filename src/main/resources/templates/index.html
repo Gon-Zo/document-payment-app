@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link th:href="@{/asseset/css/bootstrap.css}" rel="stylesheet"/>
+    <link th:href="@{/asseset/css/bootstrap-theme.css}" rel="stylesheet"/>
+</head>
+<body>
+
+<div>
+<span>
+    UserName : <span th:text="${T(io.example.documentapproval.utils.SecurityUtils).getLoginUserName()}"></span>
+</span>
+    <form id="logoutForm" action="/logout" method="POST">
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+        <button type="submit">logout</button>
+    </form>
+</div>
+
+<ul>
+    <li>
+        <button type="button" class="btn btn-primary" th:onclick="|location.href='@{/outbox-documents}'|">
+            outbox 문서함
+        </button>
+    </li>
+    <li>
+        <button type="button" class="btn btn-primary" th:onclick="|location.href='@{/inbox-documents}'|">
+            inbox 문서함
+        </button>
+    </li>
+    <li>
+        <button type="button" class="btn btn-primary" th:onclick="|location.href='@{/archive-documents}'|">
+            archive 문서함
+        </button>
+    </li>
+</ul>
+
+</body>
+</html>

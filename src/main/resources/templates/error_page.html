@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>오류</title>
+</head>
+<body>
+<h1>에러</h1>
+<h4 th:text="${error?.code}"></h4>
+<h4 th:text="${error?.message}"></h4>
+<h5>뒤로 가주세요.</h5>
+</body>
+</html>
