@@ -1,8 +1,7 @@
 <!DOCTYPE html>
-<html
-        xmlns:th="http://www.thymeleaf.org"
-        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-        layout:decorator="layouts/layout">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layouts/layout">
 <head>
     <title>Dashboard - SB Admin</title>
     <th:block th:replace="fragment/config :: configFragment"/>
@@ -12,10 +11,46 @@
 <div id="layoutSidenav">
     <th:block th:replace="fragment/leftMenu :: leftMenuFragment"/>
     <div id="layoutSidenav_content">
-        <main>
-            <span>
-                Home
-            </span>
+        <main style="padding: 20px;">
+            <div style="text-align: end;">
+                <button type="button" class="btn btn-primary" th:onclick="|location.href='@{/document}'|">
+                    문서 작성하기
+                </button>
+            </div>
+            <table id="commentTable" class="table table-striped">
+                <tr>
+                    <th class="th">제목</th>
+                    <th class="th">분류</th>
+                    <th class="th">작성자</th>
+                    <th class="th">상태</th>
+                    <th class="th">작성일</th>
+                    <th class="th">수정일</th>
+                    <th class="th">action</th>
+                </tr>
+                <tr th:each="item : ${list}" class="tr">
+                    <td th:text="${item.title}" class="td"></td>
+                    <td th:text="${item.classification}" class="td"></td>
+                    <td th:text="${item.wirter}" class="td"></td>
+                    <td th:text="${item.state}" class="td"></td>
+                    <td th:text="${item.createDate}" class="td"></td>
+                    <td th:text="${item.updateDate}" class="td"></td>
+                    <td class="td">
+                        <div th:if="${type == 'OUTBOX'}">
+                            <button type="button"
+                                    class="btn btn-primary"
+                                    th:onclick="|location.href='@{/detail-document/{id}(id=${item.id})}'|">
+                                상세
+                            </button>
+                            <form th:action="@{/api/document/{id}(id=${item.id})}" method="post">
+                                <input type="hidden" name="_method" value="DELETE">
+                                <button id="deleteBtn" type="submit" class="btn btn-warning">
+                                    삭제
+                                </button>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+            </table>
         </main>
         <th:block th:replace="fragment/footer :: footerFragment"/>
     </div>
