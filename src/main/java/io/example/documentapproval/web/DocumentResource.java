@@ -85,7 +85,7 @@ public class DocumentResource {
     @DeleteMapping("/api/document/{id}")
     public String removeDocument(@PathVariable Long id) {
         service.deleteDocument(id);
-        return "redirect:/outbox-documents";
+        return "redirect:/home";
     }
 
     @PutMapping("/api/payment-document/{id}")
@@ -97,7 +97,7 @@ public class DocumentResource {
     @PostMapping("/api/document")
     public String createDocument(DocumentDTO dto) {
         service.createdDocument(dto);
-        return "redirect:/outbox-documents";
+        return "redirect:/home";
     }
 
     @PutMapping("/api/document/{id}")

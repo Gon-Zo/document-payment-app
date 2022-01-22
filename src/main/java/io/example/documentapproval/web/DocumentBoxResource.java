@@ -17,14 +17,6 @@ public class DocumentBoxResource {
 
     private final DocumentBoxService service;
 
-    @GetMapping("/outbox-documents")
-    public String showOutBoxDocuments(Model model) {
-        List<IDocumentBox> data = service.getOutBoxDocumentList();
-        model.addAttribute("list", data);
-        model.addAttribute("type", "OUTBOX");
-        return "document-list";
-    }
-
     @GetMapping("/archive-documents")
     public String showArchiveDocuments(Model model) {
         List<IDocumentBox> data = service.getArchiveDocumentList();
