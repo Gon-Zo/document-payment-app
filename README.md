@@ -17,6 +17,7 @@ java -jar document-approval-0.0.1-SNAPSHOT.jar
 - spring boot 2.6.2
 - jpa
 - gradle
+- 타임리프
 - h2
 - java 11
 
