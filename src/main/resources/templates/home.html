@@ -17,40 +17,42 @@
                     문서 작성하기
                 </button>
             </div>
-            <table id="commentTable" class="table table-striped">
-                <tr>
-                    <th class="th">제목</th>
-                    <th class="th">분류</th>
-                    <th class="th">작성자</th>
-                    <th class="th">상태</th>
-                    <th class="th">작성일</th>
-                    <th class="th">수정일</th>
-                    <th class="th">action</th>
-                </tr>
-                <tr th:each="item : ${list}" class="tr">
-                    <td th:text="${item.title}" class="td"></td>
-                    <td th:text="${item.classification}" class="td"></td>
-                    <td th:text="${item.wirter}" class="td"></td>
-                    <td th:text="${item.state}" class="td"></td>
-                    <td th:text="${item.createDate}" class="td"></td>
-                    <td th:text="${item.updateDate}" class="td"></td>
-                    <td class="td">
-                        <div th:if="${type == 'OUTBOX'}">
-                            <button type="button"
-                                    class="btn btn-primary"
-                                    th:onclick="|location.href='@{/detail-document/{id}(id=${item.id})}'|">
-                                상세
-                            </button>
+
+            <div class="card-body">
+                <table id="datatablesSimple">
+                    <thead>
+                    <tr>
+                        <th class="th">제목</th>
+                        <th class="th">분류</th>
+                        <th class="th">작성자</th>
+                        <th class="th">상태</th>
+                        <th class="th">작성일</th>
+                        <th class="th">수정일</th>
+                        <th class="th">action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="item : ${list}"
+                        class="tr"
+                        style="cursor: pointer"
+                        th:onclick="|location.href='@{/detail-document/{id}(id=${item.id})}'|">
+                        <td th:text="${item.title}" class="td"></td>
+                        <td th:text="${item.classification}" class="td"></td>
+                        <td th:text="${item.wirter}" class="td"></td>
+                        <td th:text="${item.state}" class="td"></td>
+                        <td th:text="${item.createDate}" class="td"></td>
+                        <td th:text="${item.updateDate}" class="td"></td>
+                        <td>
                             <form th:action="@{/api/document/{id}(id=${item.id})}" method="post">
                                 <input type="hidden" name="_method" value="DELETE">
-                                <button id="deleteBtn" type="submit" class="btn btn-warning">
-                                    삭제
+                                <button type="submit">
+                                    <i class="fas fa-trash"></i>
                                 </button>
                             </form>
-                        </div>
-                    </td>
-                </tr>
-            </table>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
         </main>
         <th:block th:replace="fragment/footer :: footerFragment"/>
     </div>
