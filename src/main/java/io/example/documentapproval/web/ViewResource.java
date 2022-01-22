@@ -30,4 +30,20 @@ public class ViewResource {
         return "home";
     }
 
+    @GetMapping("/archive-documents")
+    public String showArchiveDocuments(Model model) {
+        List<IDocumentBox> data = service.getArchiveDocumentList();
+        model.addAttribute("list", data);
+        model.addAttribute("type", "ARCHIVE");
+        return "home";
+    }
+
+    @GetMapping("/inbox-documents")
+    public String showInBoxDocuments(Model model) {
+        List<IDocumentBox> data = service.getInBoxDocumentList();
+        model.addAttribute("list", data);
+        model.addAttribute("type", "INBOX");
+        return "home";
+    }
+
 }
