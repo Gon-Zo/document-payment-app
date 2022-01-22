@@ -22,7 +22,7 @@ public class DocumentBoxResource {
         List<IDocumentBox> data = service.getArchiveDocumentList();
         model.addAttribute("list", data);
         model.addAttribute("type", "ARCHIVE");
-        return "document-list";
+        return "home";
     }
 
     @GetMapping("/inbox-documents")
@@ -30,7 +30,7 @@ public class DocumentBoxResource {
         List<IDocumentBox> data = service.getInBoxDocumentList();
         model.addAttribute("list", data);
         model.addAttribute("type", "INBOX");
-        return "document-list";
+        return "home";
     }
 
 }

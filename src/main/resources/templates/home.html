@@ -12,7 +12,8 @@
     <th:block th:replace="fragment/leftMenu :: leftMenuFragment"/>
     <div id="layoutSidenav_content">
         <main style="padding: 20px;">
-            <div style="text-align: end;">
+            <div th:if="${type == 'OUTBOX'}"
+                 style="text-align: end;">
                 <button type="button" class="btn btn-primary" th:onclick="|location.href='@{/document}'|">
                     문서 작성하기
                 </button>
@@ -43,12 +44,23 @@
                         <td th:text="${item.createDate}" class="td"></td>
                         <td th:text="${item.updateDate}" class="td"></td>
                         <td>
-                            <form th:action="@{/api/document/{id}(id=${item.id})}" method="post">
+                            <button th:if="${type == 'OUTBOX'}"
+                                    title="결제"
+                                    th:onclick="|location.href='@{/payment/{id}(id=${item.id})}'|">
+                                <i class="fas fa-file"></i>
+                            </button>
+                            <form th:if="${type == 'OUTBOX'}"
+                                  th:action="@{/api/document/{id}(id=${item.id})}" method="post">
                                 <input type="hidden" name="_method" value="DELETE">
                                 <button type="submit">
                                     <i class="fas fa-trash"></i>
                                 </button>
                             </form>
+                            <button th:if="${type == 'INBOX'}"
+                                    title="결제"
+                                    th:onclick="|location.href='@{/payment/{id}(id=${item.id})}'|">
+                                <i class="fas fa-file"></i>
+                            </button>
                         </td>
                     </tr>
                     </tbody>
