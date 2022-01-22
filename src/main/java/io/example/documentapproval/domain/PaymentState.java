@@ -7,6 +7,7 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.Hibernate;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -45,4 +46,19 @@ public class PaymentState extends BaseTimeEntity implements Serializable {
         this.code = StateCode.OK;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof PaymentState) || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        PaymentState that = (PaymentState) o;
+        return that.getDocument().getId().equals(this.getDocument().getId());
+    }
+
+    @Override
+    public int hashCode() {
+        int result = getSerialVersionUID() != null ? getSerialVersionUID().hashCode() : 0;
+        result = 31 * result + (getDocument() != null ? getDocument().hashCode() : 0);
+        result = 31 * result + (getCode() != null ? getCode().hashCode() : 0);
+        return result;
+    }
 }

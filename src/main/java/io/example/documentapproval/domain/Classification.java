@@ -1,6 +1,7 @@
 package io.example.documentapproval.domain;
 
 import lombok.Getter;
+import org.hibernate.Hibernate;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -19,4 +20,16 @@ public class Classification implements Serializable {
 
     private String title;
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Classification) || Hibernate.getClass(o) != Hibernate.getClass(this)) return false;
+        Classification that = (Classification) o;
+        return that.getId().equals(this.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return id.hashCode();
+    }
 }

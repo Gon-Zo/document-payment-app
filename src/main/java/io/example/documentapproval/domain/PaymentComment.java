@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.apache.commons.lang3.ObjectUtils;
+import org.hibernate.Hibernate;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -44,7 +45,21 @@ public class PaymentComment extends BaseTimeEntity implements Serializable {
     }
 
     public Boolean getSignYn() {
-        if(ObjectUtils.isEmpty(this.signYn)) return Boolean.FALSE;
+        if (ObjectUtils.isEmpty(this.signYn)) return Boolean.FALSE;
         return signYn;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof PaymentComment) || Hibernate.getClass(o) != Hibernate.getClass(this)) return false;
+        PaymentComment that = (PaymentComment) o;
+        return that.getPaymentUser().getId().equals(this.getPaymentUser().getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return paymentUser.hashCode();
+    }
+
 }

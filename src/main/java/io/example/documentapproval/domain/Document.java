@@ -8,6 +8,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.apache.commons.lang3.ObjectUtils;
+import org.hibernate.Hibernate;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -68,10 +69,7 @@ public class Document extends BaseTimeEntity {
 
     @Transient
     public void waitedPayment() {
-        this.state = PaymentState.builder()
-                .document(this)
-                .code(StateCode.WAIT)
-                .build();
+        this.state = PaymentState.builder().document(this).code(StateCode.WAIT).build();
     }
 
     @Transient
@@ -89,9 +87,19 @@ public class Document extends BaseTimeEntity {
 
     @Transient
     public void rejectDocument() {
-        this.paymentUsers = this.paymentUsers.stream()
-                .filter(paymentUser -> ObjectUtils.isNotEmpty(paymentUser.getPaymentComment()))
-                .collect(Collectors.toSet());
+        this.paymentUsers = this.paymentUsers.stream().filter(paymentUser -> ObjectUtils.isNotEmpty(paymentUser.getPaymentComment())).collect(Collectors.toSet());
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Document) || Hibernate.getClass(o) != Hibernate.getClass(this)) return false;
+        Document document = (Document) o;
+        return document.getId().equals(this.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return getId().hashCode();
+    }
 }

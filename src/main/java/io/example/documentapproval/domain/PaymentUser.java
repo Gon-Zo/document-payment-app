@@ -5,6 +5,7 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.Hibernate;
 
 import javax.persistence.*;
 
@@ -44,4 +45,16 @@ public class PaymentUser extends BaseTimeEntity {
         this.paymentComment = paymentComment;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof PaymentUser) || Hibernate.getClass(o) != Hibernate.getClass(this)) return false;
+        PaymentUser that = (PaymentUser) o;
+        return that.getId().equals(this.getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return id.intValue();
+    }
 }

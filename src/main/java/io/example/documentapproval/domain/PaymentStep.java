@@ -6,9 +6,11 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.apache.commons.lang3.ObjectUtils;
+import org.hibernate.Hibernate;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Objects;
 
 @Table
 @Entity
@@ -41,7 +43,19 @@ public class PaymentStep extends BaseTimeEntity implements Serializable {
 
     @Transient
     public void stepUp() {
-        this.step += 1 ;
+        this.step += 1;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof PaymentStep) || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        PaymentStep that = (PaymentStep) o;
+        return Objects.equals(that.getDocument().getId(), this.getDocument().getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return this.document.hashCode();
+    }
 }

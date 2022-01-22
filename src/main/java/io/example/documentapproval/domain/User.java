@@ -3,6 +3,7 @@ package io.example.documentapproval.domain;
 import io.example.documentapproval.domain.base.BaseEntity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.Hibernate;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
@@ -42,4 +43,16 @@ public class User extends BaseEntity {
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof User) || Hibernate.getClass(o) != Hibernate.getClass(this)) return false;
+        User user = (User) o;
+        return user.getId().equals(this.getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return this.id.intValue();
+    }
 }
