@@ -37,18 +37,6 @@ java -jar document-approval-0.0.1-SNAPSHOT.jar
 |AUTHORITY| 어플리케이션 권한 테이블        |
 |AUTHORITY_USER|유저와 권한 을 매핑 테이블|
 
-## 뷰 구조
-
-|페이지명| 기능           |
-|-----|--------------|
-|로그인 페이지| 로그인          |
-|index| 목록 페이지,로그아웃  |
-|outbox 리스트 페이지| 문서작성,상세보기,삭제 |
-|outbox 상세보기 페이지| 수정           |
-|inbox 리스트 페이지| 결재           |
-|archive 리스트 페이지| 상세           |
-|archive 상세보기 페이지| 결재사유,결재내용 작성 |
-
 ## about
 
 [css template](https://startbootstrap.com/template/sb-admin)
