@@ -12,21 +12,20 @@ import io.ktor.server.routing.post
 import io.ktor.server.routing.put
 import io.ktor.server.routing.route
 import kotlinx.serialization.Serializable
-import java.lang.RuntimeException
+import org.koin.ktor.ext.inject
 
 @Serializable
 data class Customer(val name: String, val content: String)
 
 fun Route.customerRouting() {
 
+    val service by inject<HelloService>()
 
     route("/customer") {
         get {
 
-            val name = call.request.queryParameters["name"] ?: "test.."
-
             val map = mapOf(
-                "name" to name
+                "name" to service.getMessage()
             )
 
             call.respond(status = HttpStatusCode.OK, message = map)
