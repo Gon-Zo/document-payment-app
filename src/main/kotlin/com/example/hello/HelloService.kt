@@ -1,6 +1,9 @@
 package com.example.hello
 
+interface HelloService {
+    fun getMessage(): String
+}
 
-class HelloService {
-    fun getMessage(): String = "String"
+class HelloServiceImpl : HelloService {
+    override fun getMessage(): String = "String"
 }
