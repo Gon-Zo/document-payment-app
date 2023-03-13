@@ -9,13 +9,11 @@ import io.ktor.server.application.install
 import io.ktor.server.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.server.plugins.requestvalidation.RequestValidation
 import io.ktor.server.routing.routing
-import org.koin.core.module.dsl.bind
-import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
 
 val appModule = module {
-    singleOf(::HelloServiceImpl) {
-        bind<HelloService>()
+    single {
+        HelloServiceImpl() as HelloService
     }
 }
 
