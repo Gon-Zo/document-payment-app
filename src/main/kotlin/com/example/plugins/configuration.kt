@@ -1,5 +1,7 @@
 package com.example.plugins
 
+import com.example.hello.DAOFacade
+import com.example.hello.DAOFacadeImpl
 import com.example.hello.HelloService
 import com.example.hello.HelloServiceImpl
 import com.example.hello.customerRouting
@@ -13,7 +15,11 @@ import org.koin.dsl.module
 
 val appModule = module {
     single {
-        HelloServiceImpl() as HelloService
+        HelloServiceImpl(get()) as HelloService
+    }
+
+    single {
+        DAOFacadeImpl() as DAOFacade
     }
 }
 

@@ -1,5 +1,6 @@
 package com.example
 
+import com.example.plugins.DatabaseFactory
 import com.example.plugins.appModule
 import com.example.plugins.configureRouting
 import com.example.plugins.configureSerialization
@@ -17,6 +18,7 @@ fun Application.module() {
         modules(appModule)
     }
 
+    DatabaseFactory.init()
     configureRouting()
     configureSerialization()
 }

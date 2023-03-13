@@ -17,26 +17,31 @@ import org.koin.ktor.ext.inject
 @Serializable
 data class Customer(val name: String, val content: String)
 
+@Serializable
+data class ArticleRequest(val title: String, val body: String) {
+
+    fun toModel(): ArticleModel = ArticleModel(title, body)
+}
+
 fun Route.customerRouting() {
 
     val service by inject<HelloService>()
 
     route("/customer") {
         get {
-
-            val map = mapOf(
-                "name" to service.getMessage()
-            )
-
-            call.respond(status = HttpStatusCode.OK, message = map)
+            call.respond(status = HttpStatusCode.OK, message = service.getList())
         }
         get("/{id}") {
             val id = call.parameters["id"]
             call.respond(id.toString())
         }
         post {
-            val customer = call.receive<Customer>()
-            call.respond(status = HttpStatusCode.Created, message = customer)
+
+            val body = call.receive<ArticleRequest>()
+
+            val entity = service.created(body.toModel()) ?: Article()
+
+            call.respond(status = HttpStatusCode.Created, message = entity)
         }
         patch {
 
