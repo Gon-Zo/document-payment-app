@@ -5,6 +5,7 @@ import com.example.hello.DAOFacadeImpl
 import com.example.hello.HelloService
 import com.example.hello.HelloServiceImpl
 import com.example.hello.customerRouting
+import com.example.user.userRouting
 import io.ktor.serialization.kotlinx.json.json
 import io.ktor.server.application.Application
 import io.ktor.server.application.install
@@ -26,6 +27,7 @@ val appModule = module {
 fun Application.configureRouting() {
     routing {
         customerRouting()
+        userRouting()
     }
 }
 

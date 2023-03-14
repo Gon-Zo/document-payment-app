@@ -1,6 +1,7 @@
 package com.example.plugins
 
 import com.example.hello.Articles
+import com.example.user.User
 import kotlinx.coroutines.Dispatchers
 import org.jetbrains.exposed.sql.Database
 import org.jetbrains.exposed.sql.SchemaUtils
@@ -16,7 +17,7 @@ object DatabaseFactory {
         val database = Database.connect(jdbcURL, driverClassName)
         transaction(database) {
             addLogger(StdOutSqlLogger)
-            SchemaUtils.create(Articles)
+            SchemaUtils.create(Articles , User)
         }
     }
 
