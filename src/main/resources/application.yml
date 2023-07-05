@@ -1,0 +1,32 @@
+spring:
+  main:
+    allow-bean-definition-overriding: true
+
+### Logger
+### ENV use to local
+logging:
+  level:
+    io.r2dbc.mysql.QUERY: DEBUG
+    io.r2dbc.mysql.PARAM: DEBUG
+    org:
+      springframework:
+        web: TRACE
+      springframework.r2dbc: TRACE
+      springframework.transaction: TRACE
+
+read:
+  datasource:
+    driver: mysql
+    host: localhost
+    port: 23306
+    database: WEBFLUX
+    username: root
+    password: 1234
+write:
+  datasource:
+    driver: mysql
+    host: localhost
+    port: 23306
+    database: WEBFLUX
+    username: root
+    password: 1234

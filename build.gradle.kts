@@ -27,6 +27,13 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("io.projectreactor:reactor-test")
+
+
+    // r2dbc drive add
+    // https://mvnrepository.com/artifact/dev.miku/r2dbc-mysql
+    implementation("dev.miku:r2dbc-mysql:0.8.2.RELEASE")
+    // https://mvnrepository.com/artifact/io.r2dbc/r2dbc-h2
+    testImplementation("io.r2dbc:r2dbc-h2:1.0.0.RELEASE")
 }
 
 tasks.withType<KotlinCompile> {
