@@ -13,7 +13,9 @@ import io.r2dbc.spi.ConnectionFactoryOptions.USER
 import io.r2dbc.spi.Option
 import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.context.annotation.Bean
+import org.springframework.context.annotation.ComponentScan
 import org.springframework.context.annotation.Configuration
+import org.springframework.context.annotation.FilterType
 import org.springframework.data.r2dbc.config.AbstractR2dbcConfiguration
 import org.springframework.data.r2dbc.config.EnableR2dbcAuditing
 import org.springframework.data.r2dbc.core.DefaultReactiveDataAccessStrategy
@@ -24,12 +26,23 @@ import org.springframework.data.r2dbc.repository.config.EnableR2dbcRepositories
 import org.springframework.r2dbc.connection.R2dbcTransactionManager
 import org.springframework.r2dbc.core.DatabaseClient
 import org.springframework.transaction.ReactiveTransactionManager
+import java.lang.annotation.Retention
+import java.lang.annotation.RetentionPolicy
 import java.time.Duration
+
+@Retention(RetentionPolicy.RUNTIME)
+annotation class R2dbcRepository
 
 @EnableR2dbcAuditing
 @Configuration
 @EnableR2dbcRepositories(
-    basePackages = [], entityOperationsRef = "r2dbcEntityOperations"
+    includeFilters = [
+        ComponentScan.Filter(
+            type = FilterType.ANNOTATION,
+            value = [R2dbcRepository::class]
+        )
+    ],
+    entityOperationsRef = "r2dbcEntityOperations"
 )
 class R2dbcDataSourceConfiguration(
     private val readDataSourceProperties: ReadDataSourceProperties,

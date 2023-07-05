@@ -19,7 +19,7 @@ read:
     driver: mysql
     host: localhost
     port: 23306
-    database: WEBFLUX
+    database: default
     username: root
     password: 1234
 write:
@@ -27,6 +27,6 @@ write:
     driver: mysql
     host: localhost
     port: 23306
-    database: WEBFLUX
+    database: default
     username: root
     password: 1234
