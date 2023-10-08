@@ -1,4 +1,4 @@
-package com.example.document
+package com.example.order
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.context.properties.ConfigurationPropertiesScan
