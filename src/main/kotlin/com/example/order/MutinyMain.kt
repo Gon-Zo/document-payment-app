@@ -1,6 +1,5 @@
 package com.example.order
 
-import com.example.order.entity.Post
 import jakarta.persistence.Persistence
 import org.hibernate.reactive.mutiny.Mutiny
 

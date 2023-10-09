@@ -20,14 +20,16 @@ repositories {
 }
 
 dependencies {
-//    implementation("org.springframework.boot:spring-boot-starter-data-r2dbc")
+
+    implementation("io.projectreactor.kotlin:reactor-kotlin-extensions")
     implementation("org.springframework.boot:spring-boot-starter-webflux")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
-    implementation("io.projectreactor.kotlin:reactor-kotlin-extensions")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
+
     testImplementation("io.projectreactor:reactor-test")
+
 
     // client .. !!
     implementation("io.vertx:vertx-mysql-client:4.4.5")
@@ -35,6 +37,10 @@ dependencies {
     implementation("org.hibernate.reactive:hibernate-reactive-core:2.0.6.Final")
     // https://mvnrepository.com/artifact/org.hibernate/hibernate-jpamodelgen
     compileOnly("org.hibernate:hibernate-jpamodelgen:4.3.7.Final")
+
+    // https://mvnrepository.com/artifact/io.smallrye.reactive/mutiny-reactor
+    implementation("io.smallrye.reactive:mutiny-reactor:2.5.1")
+
 }
 
 tasks.withType<KotlinCompile> {

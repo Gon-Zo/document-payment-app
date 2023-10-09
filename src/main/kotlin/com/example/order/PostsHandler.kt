@@ -1,22 +1,27 @@
-package com.example.order.handler
+package com.example.order
 
-import com.example.order.entity.CreatePostCommand
-import com.example.order.entity.Post
-import com.example.order.repository.PostRepository
-import org.slf4j.LoggerFactory
+
+import io.smallrye.mutiny.converters.uni.UniReactorConverters
 import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Component
 import org.springframework.web.reactive.function.server.ServerRequest
 import org.springframework.web.reactive.function.server.ServerResponse
 import reactor.core.publisher.Mono
-import reactor.kotlin.core.publisher.toMono
 
-private val logger = LoggerFactory.getLogger(PostsHandler::class.java)
 
 @Component
 class PostsHandler(
     private val postRepository: PostRepository
 ) {
+
+    fun getOne(req: ServerRequest): Mono<ServerResponse> =
+        postRepository.findOne()
+            .convert()
+            .with(UniReactorConverters.toMono())
+            .flatMap { p ->
+                ServerResponse.ok()
+                    .body(Mono.just(p!!), Post::class.java)
+            }
 
     fun create(req: ServerRequest): Mono<ServerResponse> {
         return req.bodyToMono(CreatePostCommand::class.java)
@@ -24,7 +29,8 @@ class PostsHandler(
                 Post.of(it.title, it.content).run {
                     postRepository.save(this)
                         .convert()
-                        .toMono()
+                        .with(UniReactorConverters.toMono())
+
                 }
             }
             .flatMap { _ -> ServerResponse.status(HttpStatus.OK).build() }

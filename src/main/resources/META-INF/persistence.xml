@@ -6,7 +6,7 @@
     <persistence-unit name="blogPU">
         <provider>org.hibernate.reactive.provider.ReactivePersistenceProvider</provider>
 
-        <class>com.example.order.entity.Post</class>
+        <class>com.example.order.Post</class>
 
         <properties>
 
@@ -25,8 +25,8 @@
                       value="10"/>
 
             <!-- Automatic schema export -->
-            <property name="jakarta.persistence.schema-generation.database.action"
-                      value="drop-and-create"/>
+<!--            <property name="jakarta.persistence.schema-generation.database.action"-->
+<!--                      value="drop-and-create"/>-->
 
             <!-- SQL statement logging -->
             <property name="hibernate.show_sql" value="true"/>

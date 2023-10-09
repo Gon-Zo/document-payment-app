@@ -1,10 +1,11 @@
-package com.example.order.entity
+package com.example.order
 
 import jakarta.persistence.Entity
 import jakarta.persistence.GeneratedValue
 import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
 import jakarta.persistence.Table
+import java.io.Serializable
 
 
 @Entity
@@ -13,7 +14,7 @@ data class Post(
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY) var id: Long?,
     var title: String?,
     var content: String?,
-) {
+) : Serializable {
 
     constructor() : this(null, null, null)
 
