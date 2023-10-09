@@ -1,6 +1,7 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
+    java
     id("org.springframework.boot") version "3.1.1"
     id("io.spring.dependency-management") version "1.1.0"
     kotlin("jvm") version "1.8.22"
@@ -19,7 +20,7 @@ repositories {
 }
 
 dependencies {
-    implementation("org.springframework.boot:spring-boot-starter-data-r2dbc")
+//    implementation("org.springframework.boot:spring-boot-starter-data-r2dbc")
     implementation("org.springframework.boot:spring-boot-starter-webflux")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("io.projectreactor.kotlin:reactor-kotlin-extensions")
@@ -28,12 +29,12 @@ dependencies {
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("io.projectreactor:reactor-test")
 
-
-    // r2dbc drive add
-    // https://mvnrepository.com/artifact/dev.miku/r2dbc-mysql
-    implementation("dev.miku:r2dbc-mysql:0.8.2.RELEASE")
-    // https://mvnrepository.com/artifact/io.r2dbc/r2dbc-h2
-    testImplementation("io.r2dbc:r2dbc-h2:1.0.0.RELEASE")
+    // client .. !!
+    implementation("io.vertx:vertx-mysql-client:4.4.5")
+    // https://mvnrepository.com/artifact/org.hibernate.reactive/hibernate-reactive-core
+    implementation("org.hibernate.reactive:hibernate-reactive-core:2.0.6.Final")
+    // https://mvnrepository.com/artifact/org.hibernate/hibernate-jpamodelgen
+    compileOnly("org.hibernate:hibernate-jpamodelgen:4.3.7.Final")
 }
 
 tasks.withType<KotlinCompile> {
