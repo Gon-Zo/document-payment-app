@@ -22,6 +22,7 @@ class BeanConfig {
             accept(MediaType.APPLICATION_JSON).nest {
                 POST { posts.create(it) }
                 GET { posts.getOne(it) }
+                DELETE { posts.delete(it) }
             }
         }
     }

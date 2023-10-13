@@ -35,4 +35,10 @@ class PostsHandler(
             }
             .flatMap { _ -> ServerResponse.status(HttpStatus.OK).build() }
     }
+
+    fun delete(req: ServerRequest) =
+        postRepository.delete()
+            .convert()
+            .with(UniReactorConverters.toMono())
+            .flatMap { p -> ServerResponse.ok().build() }
 }

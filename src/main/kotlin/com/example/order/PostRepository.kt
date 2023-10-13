@@ -20,4 +20,10 @@ class PostRepository(
             .replaceWith(post)
     }
 
+    fun delete(id: Long = 1L): Uni<Post> =
+        sessionFactory.withSession { s ->
+            s.find(Post::class.java, id)
+                .call { p -> s.remove(p) }
+        }
+
 }

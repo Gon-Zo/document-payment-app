@@ -41,6 +41,8 @@ dependencies {
     // https://mvnrepository.com/artifact/io.smallrye.reactive/mutiny-reactor
     implementation("io.smallrye.reactive:mutiny-reactor:2.5.1")
 
+    // https://mvnrepository.com/artifact/org.hibernate/hibernate-jpamodelgen
+    compileOnly("org.hibernate:hibernate-jpamodelgen:6.3.1.Final")
 }
 
 tasks.withType<KotlinCompile> {

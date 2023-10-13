@@ -77,3 +77,8 @@
 #logging:
 #  level:
 #    root: debug
+
+
+logger:
+  hibernate.name: org.hibernate.SQL
+  hibernate.level: debug
